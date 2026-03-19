@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Diksha Sharma's Work – Videos, Graphic Designs, and Logos portfolio." />
+    <title>Work | Diksha Sharma</title>
+
+    <!-- Prevent dark/light flash -->
+    <script>(function () { var t = localStorage.getItem('ds-theme') || 'dark'; document.documentElement.setAttribute('data-theme', t); }());</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="styles/pages.css" />
+
+    <style>
+        /* ── IMAGE CARDS (Graphic Designs) ── */
+        .img-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .img-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: var(--shadow-glow-v), var(--shadow-card);
+        }
+
+        .img-card-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--bg-surface);
+        }
+
+        .img-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .img-card:hover .img-card-thumb img {
+            transform: scale(1.06);
+        }
+
+        .img-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .img-card:hover .img-card-overlay {
+            opacity: 1;
+        }
+
+        .img-zoom-icon {
+            font-size: 2rem;
+            transform: scale(0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .img-card:hover .img-zoom-icon {
+            transform: scale(1);
+        }
+
+        .img-card-body {
+            padding: 1rem 1.1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .img-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(139, 92, 246, 0.4);
+        }
+
+        /* Section divider */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.4), transparent);
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-glow"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <img id="lightbox-img" src="" alt="Design preview" onclick="event.stopPropagation()" />
+    </div>
+
+    <nav class="navbar">
+        <a class="nav-logo" href="index.html">DS</a>
+        <div class="nav-controls">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="contact.html" class="nav-cta">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <div class="theme-toggle-thumb"><span class="theme-toggle-icon" id="theme-thumb-icon">🌙</span></div>
+            </button>
+            <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <main class="page-content">
+
+        <!-- ── WORK HERO ── -->
+        <section class="work-hero">
+            <div class="work-hero-inner">
+                <div class="section-label" data-aos="fade-up">Portfolio</div>
+                <h1 class="section-title" data-aos="fade-up" data-aos-delay="100">
+                    My Creative <span>Work</span>
+                </h1>
+                <p class="section-subtitle" style="margin:0 auto;" data-aos="fade-up" data-aos-delay="200">
+                    Explore my portfolio across videos, graphic designs, and logos — each piece crafted
+                    with intention and creative excellence.
+                </p>
+
+                <!-- Tabs -->
+                <div class="work-tabs" data-aos="fade-up" data-aos-delay="300">
+                    <button class="work-tab active" data-tab="videos">🎬 Videos</button>
+                    <button class="work-tab" data-tab="graphics">🎨 Graphic Designs</button>
+                    <button class="work-tab" data-tab="logos">🏷️ Logos</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ══════════════════════ VIDEOS SECTION ══════════════════════ -->
+        <div id="section-videos" class="work-section active">
+            <div class="work-section-header">
+                <div class="work-section-icon" style="background:rgba(139,92,246,0.15);">🎬</div>
+                <div>
+                    <h2 class="section-title" style="font-size:1.8rem; margin:0;">Video Edits</h2>
+                    <p style="color:var(--text-muted); font-size:0.85rem; font-family:'Space Grotesk',sans-serif;">
+                        Cinematic stories crafted through precise editing &amp; motion</p>
+                </div>
+            </div>
+
+            <div class="work-grid">
+                <!-- Video 1 -->
+                <div class="img-card tilt-card" data-aos="fade-up">
+                    <div class="img-card-thumb" style="aspect-ratio: 16/9;">
+                        <!-- <iframe src="https://drive.google.com/file/d/19KTD3jLlarqeYa-GC2kS10o5VlIe1jtq/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> -->
+                        <video src="public/video1.mp4" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="img-card-thumb" style="aspect-ratio: 16/9;">
+                        <!-- <iframe src="https://drive.google.com/file/d/1NBhEg32oU1_GLfiHrXYrGcH2EvUASdbt/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> -->
+                        <video src="public/video2.mp4" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-card-thumb" style="aspect-ratio: 16/9;">
+                        <video src="public/video3.mp4" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+                <!-- Video 4 -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-card-thumb" style="aspect-ratio: 16/9;">
+                        <video src="public/video4.mp4" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+                <!-- Video 5 -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-card-thumb" style="aspect-ratio: 16/9;">
+                        <video src="public/video5.mp4" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+                <!-- Video 6 -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-card-thumb" style="aspect-ratio: 16/9;">
+                        <video src="public/video6.mp4" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════ GRAPHIC DESIGNS SECTION ══════════════════════ -->
+        <div id="section-graphics" class="work-section">
+            <div class="work-section-header">
+                <div class="work-section-icon" style="background:rgba(236,72,153,0.15);">🎨</div>
+                <div>
+                    <h2 class="section-title" style="font-size:1.8rem; margin:0;">Graphic Designs</h2>
+                    <p style="color:var(--text-muted); font-size:0.85rem; font-family:'Space Grotesk',sans-serif;">
+                        Visual assets crafted with precision and aesthetic sensibility</p>
+                </div>
+            </div>
+
+            <div class="work-grid">
+                <!-- Design 1 – Dark Fantasy UI -->
+                <div class="img-card tilt-card" data-aos="fade-up" onclick="openLightbox('public/image copy 5.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 5.png" alt="Dark Fantasy Game UI Design" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Web Template</div>
+                    </div>
+                </div>
+
+                <!-- Design 2 – Jungle Cruise Movie Poster -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('public/image copy 4.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 4.png" alt="Jungle Cruise Film Poster" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Jungle Cruise – Film Poster</div>
+                    </div>
+                </div>
+
+                <!-- Design 3 – Character Illustration -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('public/image copy 2.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 2.png" alt="Movie Poster" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Movie Poster</div>
+                    </div>
+                </div>
+
+                <!-- Design 4 – Fantasy Digital Art -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="300" onclick="openLightbox('public/image.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image.png" alt="Brochure" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Brochure</div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="300" onclick="openLightbox('public/image copy 3.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 3.png" alt="Flyer" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Flyer</div>
+                    </div>
+                </div>
+
+                <!-- Design 5 – Fashion Magazine Brochure -->
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="400" onclick="openLightbox('public/image copy.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy.png" alt="Animal Manipulation" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Animal Manipulation</div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="400" onclick="openLightbox('public/image copy 7.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 7.png" alt="Animal Manipulation" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Animal Manipulation</div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="400" onclick="openLightbox('public/image copy 8.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 8.png" alt="Fashion Magazine Brochure" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Fashion Magazine Brochure</div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="400" onclick="openLightbox('public/image copy 9.png')">
+                    <div class="img-card-thumb">
+                        <img src="public/image copy 9.png" alt="Fashion Magazine Brochure" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                    <div class="img-card-body">
+                        <div class="img-card-title">Fashion Magazine Brochure</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════ LOGOS SECTION ══════════════════════ -->
+        <div id="section-logos" class="work-section">
+            <div class="work-section-header">
+                <div class="work-section-icon" style="background:rgba(6,182,212,0.15);">🏷️</div>
+                <div>
+                    <h2 class="section-title" style="font-size:1.8rem; margin:0;">Logo Designs</h2>
+                    <p style="color:var(--text-muted); font-size:0.85rem; font-family:'Space Grotesk',sans-serif;">Brand
+                        marks crafted to leave a memorable first impression</p>
+                </div>
+            </div>
+
+            <div class="work-grid">
+                <div class="img-card tilt-card" data-aos="fade-up" onclick="openLightbox('public/image copy 10.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 10.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('public/image copy 11.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 11.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('public/image copy 12.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 12.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="300" onclick="openLightbox('public/image copy 13.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 13.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="400" onclick="openLightbox('public/image copy 14.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 14.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="500" onclick="openLightbox('public/image copy 15.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 15.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="600" onclick="openLightbox('public/image copy 16.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 16.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="700" onclick="openLightbox('public/image copy 17.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 17.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="800" onclick="openLightbox('public/image copy 18.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 18.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+                <div class="img-card tilt-card" data-aos="fade-up" data-aos-delay="900" onclick="openLightbox('public/image copy 19.png')">
+                    <div class="img-card-thumb" style="aspect-ratio: 1;">
+                        <img src="public/image copy 19.png" alt="Logo" loading="lazy" />
+                        <div class="img-card-overlay"><span class="img-zoom-icon">🔍</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── BOTTOM CTA ── -->
+        <section style="padding:4rem 5% 6rem; position:relative; z-index:10;">
+            <div style="max-width:800px; margin:0 auto; text-align:center;">
+                <div class="glass-card" style="padding:3rem; border-color:rgba(139,92,246,0.2);" data-aos="fade-up">
+                    <p style="font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:1rem;">Have a
+                        project in mind?</p>
+                    <p
+                        style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.75rem; font-family:'Space Grotesk',sans-serif;">
+                        I'm open to new opportunities and collaborations. Let's create something amazing together.</p>
+                    <a href="contact.html" class="btn-primary">Get in Touch →</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-brand">Diksha Sharma</div>
+        <p class="footer-copy">© 2025 Diksha Sharma. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 60 });</script>
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    </script>
+</body>
+
+</html>

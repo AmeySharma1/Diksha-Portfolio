@@ -1,0 +1,325 @@
+/* ===================================================
+   DIKSHA SHARMA PORTFOLIO - 3D ANIMATIONS
+   =================================================== */
+
+/* ── KEYFRAMES ── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ── HERO ENTRANCE ANIMATIONS ── */
+.hero-eyebrow {
+    animation: fadeInDown 0.7s ease 0.2s both;
+}
+
+.hero-title {
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.hero-desc {
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
+
+.hero-actions {
+    animation: fadeInUp 0.8s ease 0.7s both;
+}
+
+.hero-visual {
+    animation: scaleIn 0.9s ease 0.4s both;
+}
+
+/* ── TILT CARD 3D ── */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease;
+}
+
+/* ── SHIMMER EFFECT ── */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.shimmer-text {
+    background: linear-gradient(90deg,
+            var(--text-secondary) 0%,
+            var(--text-primary) 40%,
+            var(--accent-violet) 50%,
+            var(--text-primary) 60%,
+            var(--text-secondary) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+}
+
+/* ── GLOW PULSE ── */
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 50px rgba(139, 92, 246, 0.6);
+    }
+}
+
+.glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* ── ORBIT ANIMATION ── */
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(60px) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translateX(60px) rotate(-360deg);
+    }
+}
+
+/* ── TYPEWRITER ── */
+.typewriter-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--accent-violet);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ── MORPHING GRADIENT BG ── */
+@keyframes morphGrad {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.morph-bg {
+    background-size: 300% 300%;
+    animation: morphGrad 8s ease infinite;
+}
+
+/* ── STAGGER REVEAL ── */
+.stagger-1 {
+    animation-delay: 0.1s;
+}
+
+.stagger-2 {
+    animation-delay: 0.2s;
+}
+
+.stagger-3 {
+    animation-delay: 0.3s;
+}
+
+.stagger-4 {
+    animation-delay: 0.4s;
+}
+
+.stagger-5 {
+    animation-delay: 0.5s;
+}
+
+.stagger-6 {
+    animation-delay: 0.6s;
+}
+
+/* ── HOVER RISE ── */
+.hover-rise {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-rise:hover {
+    transform: translateY(-8px) rotateX(3deg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), var(--shadow-glow-v);
+}
+
+/* ── BORDER FLOW ── */
+@keyframes borderFlow {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.border-flow {
+    position: relative;
+}
+
+.border-flow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink), var(--accent-cyan), var(--accent-violet));
+    background-size: 200% auto;
+    animation: borderFlow 3s linear infinite;
+    z-index: -1;
+}
+
+/* ── NUMBER COUNT-UP ── */
+.count-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── WORK CARD OVERLAY EFFECT ── */
+.work-card-wrap {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.work-card-wrap::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(5, 5, 8, 0.9), transparent);
+    z-index: 1;
+    transition: var(--transition);
+}
+
+.work-card-wrap:hover::before {
+    height: 80%;
+}
+
+/* ── LOADING SPINNER ── */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+/* ── ACCENT DOT ── */
+.accent-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--grad-primary);
+    animation: glowPulse 2s ease-in-out infinite;
+    vertical-align: middle;
+}

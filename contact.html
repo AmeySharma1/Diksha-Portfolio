@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Contact Diksha Sharma – Graphic Designer & Video Editor. Get in touch for projects, collaborations, and inquiries." />
+    <title>Contact | Diksha Sharma</title>
+
+    <!-- Prevent dark/light flash -->
+    <script>(function () { var t = localStorage.getItem('ds-theme') || 'dark'; document.documentElement.setAttribute('data-theme', t); }());</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="styles/pages.css" />
+</head>
+
+<body>
+
+    <div class="cursor-glow"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav class="navbar">
+        <a class="nav-logo" href="index.html">DS</a>
+        <div class="nav-controls">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="contact.html" class="nav-cta">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <div class="theme-toggle-thumb"><span class="theme-toggle-icon" id="theme-thumb-icon">🌙</span></div>
+            </button>
+            <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <main class="page-content">
+
+        <!-- ── CONTACT HERO ── -->
+        <section class="contact-hero">
+            <div class="contact-hero-inner">
+
+                <!-- Center Info -->
+                <div data-aos="fade-up" style="max-width: 600px; margin: 0 auto; text-align: center; width: 100%; grid-column: 1 / -1;">
+                    <div class="section-label" style="margin-left: auto; margin-right: auto; margin-bottom: 1rem;">Contact</div>
+                    <h1 class="section-title">Let's <span>Create</span><br>Together</h1>
+                    <p class="section-subtitle" style="max-width:420px; margin: 0 auto 2.5rem;">
+                        Have a project in mind? Whether you need a stunning brand identity, a cinematic
+                        video edit, or a complete digital presence — I'd love to hear from you.
+                    </p>
+
+                    <!-- Info items -->
+                    <div class="contact-info-list" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2.5rem;">
+
+                        <div class="contact-info-item glass-card" style="padding:1.5rem 2rem; gap:1.5rem; justify-content: center; width: 100%; max-width: 350px;">
+                            <div class="ci-icon">✉️</div>
+                            <div class="ci-text" style="text-align: left;">
+                                <div class="ci-label">Email</div>
+                                <div class="ci-value">
+                                    <a href="mailto:diksk2025@gmail.com"
+                                        style="color:var(--accent-violet); text-decoration:none; font-size: 1.1rem; font-weight: 500;">
+                                        diksk2025@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Social links -->
+                    <div class="contact-social" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                        <div class="contact-social-title">Find me on</div>
+                        <div class="social-links" style="justify-content: center; gap: 1rem;">
+                            <a href="https://www.instagram.com/dikshagraphics22/" target="_blank" class="social-link" title="Instagram" aria-label="Instagram" style="display:flex; align-items:center;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/diksha-sharma-539876384/" target="_blank" class="social-link" title="LinkedIn" aria-label="LinkedIn" style="display:flex; align-items:center;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.contact-hero-inner -->
+        </section>
+
+
+    </main>
+
+    <footer>
+        <div class="footer-brand">Diksha Sharma</div>
+        <p class="footer-copy">© 2025 Diksha Sharma. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 60 });</script>
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

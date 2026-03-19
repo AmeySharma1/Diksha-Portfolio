@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Diksha Sharma – Graphic Designer & Video Editor. Crafting stunning visual stories through design and motion." />
+    <title>Diksha Sharma | Graphic Designer & Video Editor</title>
+
+    <!-- Prevent dark/light flash -->
+    <script>(function () { var t = localStorage.getItem('ds-theme') || 'dark'; document.documentElement.setAttribute('data-theme', t); }());</script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- AOS (Animate on Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="styles/pages.css" />
+</head>
+
+<body>
+
+    <!-- Cursor glow -->
+    <div class="cursor-glow"></div>
+
+    <!-- Particle canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- ── NAVIGATION ── -->
+    <nav class="navbar">
+        <a class="nav-logo" href="index.html">DS</a>
+        <div class="nav-controls">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="contact.html" class="nav-cta">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <div class="theme-toggle-thumb">
+                    <span class="theme-toggle-icon" id="theme-thumb-icon">🌙</span>
+                </div>
+            </button>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── HERO SECTION ── -->
+    <main class="page-content">
+        <section class="hero">
+            <div class="hero-inner">
+
+                <!-- Left: Text -->
+                <div class="hero-text">
+                    <div class="hero-eyebrow">
+                        <span class="neon-badge violet">✦ Portfolio 2025</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        <span class="line-1">Creative</span><br>
+                        <span class="line-2">Visual</span><br>
+                        <span class="line-3 gradient-text" id="typewriter-text">Storyteller</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Hi, I'm <strong>Diksha Sharma</strong> — a passionate graphic designer and video editor
+                        who transforms ideas into stunning visual experiences that leave a lasting impression.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="work.html" class="btn-primary">View My Work &rarr;</a>
+                        <a href="contact.html" class="btn-secondary">Let's Connect</a>
+                    </div>
+                </div>
+
+                <!-- Right: Visual -->
+                <div class="hero-visual">
+                    <div class="avatar-container">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-ring avatar-ring-2"></div>
+                        <div class="avatar-glow"></div>
+                        <div class="avatar-frame">
+                            <span class="avatar-initials">DS</span>
+                        </div>
+
+                        <!-- Floating stat cards -->
+                        <div class="hero-stat">
+                            <div class="stat-icon violet">🎨</div>
+                            <div>
+                                <div class="stat-value"><span data-count="50">0</span>+</div>
+                                <div class="stat-label">Design Projects</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="stat-icon pink">🎬</div>
+                            <div>
+                                <div class="stat-value"><span data-count="30">0</span>+</div>
+                                <div class="stat-label">Videos Edited</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="stat-icon cyan">⭐</div>
+                            <div>
+                                <div class="stat-value"><span data-count="3">0</span>+</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.hero-inner -->
+
+            <!-- Scroll indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- ── SERVICES STRIP ── -->
+        <section class="services-strip">
+            <div class="container">
+                <div class="section-label">What I Do</div>
+                <h2 class="section-title">Crafting <span>Visual Mastery</span></h2>
+                <p class="section-subtitle">
+                    From brand identities to cinematic video edits — I bring your creative vision to life
+                    with precision and passion.
+                </p>
+
+                <div class="services-grid">
+
+                    <div class="glass-card service-card tilt-card reveal stagger-1">
+                        <div class="service-icon v">🎬</div>
+                        <div class="service-title">Video Editing</div>
+                        <div class="service-desc">Transforming raw footage into cinematic stories with seamless cuts,
+                            color grading, motion graphics and sound design.</div>
+                    </div>
+
+                    <div class="glass-card service-card tilt-card reveal stagger-2">
+                        <div class="service-icon p">🎨</div>
+                        <div class="service-title">Graphic Design</div>
+                        <div class="service-desc">Creating compelling visual assets — social media graphics, marketing
+                            materials, banners, and digital artwork.</div>
+                    </div>
+
+                    <div class="glass-card service-card tilt-card reveal stagger-3">
+                        <div class="service-icon c">🏷️</div>
+                        <div class="service-title">Logo & Branding</div>
+                        <div class="service-desc">Designing distinctive logos and brand identities that communicate the
+                            essence of your business with clarity.</div>
+                    </div>
+
+                    <div class="glass-card service-card tilt-card reveal stagger-4">
+                        <div class="service-icon g">📣</div>
+                        <div class="service-title">Digital Marketing</div>
+                        <div class="service-desc">Executing data-driven campaigns across social media, SEO, and email to
+                            amplify online presence and drive growth.</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CTA BANNER ── -->
+        <section style="padding: 4rem 5% 6rem; position: relative; z-index: 10;">
+            <div style="max-width:900px; margin:0 auto;">
+                <div class="glass-card tilt-card"
+                    style="padding:3.5rem; text-align:center; border-color:rgba(139,92,246,0.25); background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(236,72,153,0.05));">
+                    <div class="section-label" style="justify-content:center;">Ready to Create?</div>
+                    <h2 class="section-title" style="max-width:600px; margin:0 auto 1rem;" data-aos="fade-up">
+                        Let's Build Something <span>Beautiful</span> Together
+                    </h2>
+                    <p class="section-subtitle" style="margin:0 auto 2rem; text-align:center;" data-aos="fade-up"
+                        data-aos-delay="100">
+                        Whether it's a brand identity, a video project, or digital marketing — I'm here to
+                        turn your vision into reality.
+                    </p>
+                    <a href="contact.html" class="btn-primary" data-aos="fade-up" data-aos-delay="200">
+                        Contact Me →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main><!-- /.page-content -->
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-brand">Diksha Sharma</div>
+        <p class="footer-copy">© 2025 Diksha Sharma. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 60 });</script>
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
